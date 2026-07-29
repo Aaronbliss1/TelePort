@@ -1,0 +1,2 @@
+-- Deprecated. Use schema.sql, which includes webhook idempotency and the
+-- payment/ledger schema required by the Arc Payments application.

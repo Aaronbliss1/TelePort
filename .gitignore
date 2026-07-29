@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# env / secrets — never commit
+.env
+.env.local
+.env.*.local
+*.pem
+recovery_file*.dat
+
+# next.js
+.next/
+out/
+
+# build
+build/
+dist/
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+
+# vercel
+.vercel

@@ -1,0 +1,2 @@
+-- Deprecated. Use schema.sql, which now contains the complete Arc Payments
+-- baseline including accounts and one Arc wallet per user.
