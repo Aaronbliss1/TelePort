@@ -17,6 +17,7 @@ export default function Nav() {
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
   const [email, setEmail] = useState<string | null>(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? null));
@@ -57,23 +58,30 @@ export default function Nav() {
           })}
         </nav>
       </div>
-
-      <div className="text-xs text-paper-500 font-mono leading-relaxed space-y-3">
+<div className="text-xs text-paper-500 font-mono leading-relaxed space-y-3">
         <div>
-          <p>Arc Testnet hub</p>
-          <p className="text-signal">● connected</p>
+          <p className="text-signal">● Live on Arc Testnet</p>
         </div>
-        {email && (
-          <div className="border-t border-ink-700 pt-3">
-            <p className="truncate" title={email}>
-              {email}
-            </p>
-            <button onClick={signOut} className="text-loss hover:underline mt-1">
-              Sign out
-            </button>
-          </div>
-        )}
+        <div className="border-t border-ink-700 pt-3">
+          <button
+            onClick={() => setSettingsOpen((open) => !open)}
+            className="text-paper-500 hover:text-paper-100 transition-colors"
+          >
+            Settings
+          </button>
+          {settingsOpen && email && (
+            <div className="mt-2">
+              <p className="truncate" title={email}>
+                Email: {email}
+              </p>
+              <button onClick={signOut} className="text-loss hover:underline mt-1">
+                Sign out
+              </button>
+            </div>
+          )}
+        </div>
       </div>
+      
     </aside>
   );
 }

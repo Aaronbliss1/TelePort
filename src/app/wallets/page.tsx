@@ -276,7 +276,7 @@ if (firstWallet) {
                     inputMode="decimal"
                     value={amount}
                     onChange={(event) => setAmount(event.target.value)}
-                    placeholder="25.00"
+                    placeholder="Eg 5.00"
                     className="w-full rounded-sm border border-ink-600 bg-ink-800 px-3 py-2 font-mono text-sm"
                   />
                 </label>
