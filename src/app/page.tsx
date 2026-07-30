@@ -102,10 +102,9 @@ export default function OverviewPage() {
   return (
     <div className="space-y-8">
       <header>
-        <p className="font-mono text-xs text-signal mb-2">UNIFIED USDC</p>
         <h1 className="font-display text-3xl font-semibold tracking-tight">Your available balance</h1>
         <p className="text-paper-500 mt-2 max-w-xl">
-          USDC deposited through Gateway is spendable across Ethereum, Arbitrum, Optimism, Avalanche, Base, and Polygon testnets.
+          USDC deposited through Gateway is spendable across Arc, Ethereum, Arbitrum, Optimism, Avalanche, Base, and Polygon testnets.
         </p>
       </header>
 
@@ -164,7 +163,7 @@ export default function OverviewPage() {
         <Card>
           <CardHeader>
             <p className="text-sm font-medium">Wallet balance by chain</p>
-            <p className="text-xs text-paper-500 mt-0.5">USDC sitting in your deposit wallets (not yet in Gateway)</p>
+            <p className="text-xs text-paper-500 mt-0.5">USDC sitting in your deposit wallets</p>
           </CardHeader>
           <CardBody>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -183,7 +182,7 @@ export default function OverviewPage() {
                 </span>
               </p>
               <Link href="/wallets" className="text-xs text-signal hover:underline">
-                Deposit to Gateway →
+                Deposit to Gateway
               </Link>
             </div>
           </CardBody>
