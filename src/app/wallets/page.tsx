@@ -198,30 +198,23 @@ if (firstWallet) {
   return (
     <div className="space-y-8">
       <header>
-        <p className="mb-2 font-mono text-xs text-signal">UNIFIED USDC</p>
         <h1 className="font-display text-3xl font-semibold tracking-tight">
           Fund your unified balance
         </h1>
         <p className="mt-2 max-w-xl text-paper-500">
-          Deposit USDC from your SCA wallet into Circle Gateway. Arc Testnet is
-          the default deposit rail and uses USDC-sponsored gas.
+          Deposit USDC from your wallet into your unified balance. Send across
+          supported chains without worrying about native gas fees.
         </p>
       </header>
 
       <Card className="border-signal/30">
-        <CardHeader>
-          <p className="text-sm font-medium">Arc Testnet wallet</p>
-        </CardHeader>
         <CardBody>
           {arcWallet ? (
             <div className="space-y-2">
               <p className="text-xs text-paper-500">
-                Your SCA wallet address
+                Your wallet address
               </p>
               <p className="break-all font-mono text-sm">{arcWallet.address}</p>
-              <p className="text-xs text-paper-500">
-                Status: {arcWallet.state}
-              </p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -250,38 +243,7 @@ if (firstWallet) {
 
       {wallets.length > 0 && (
         <>
-          <Card>
-            <CardHeader>
-              <p className="text-sm font-medium">Gateway availability</p>
-            </CardHeader>
-            <CardBody className="space-y-3">
-              <div>
-                <p className="text-xs text-paper-500">
-                  Available on {chainLabel(chainKey)}
-                </p>
-                <p className="mt-1 font-display text-3xl font-semibold tabular-nums">
-                  {selectedBalance} USDC
-                </p>
-              </div>
-
-              {balances.length > 0 && (
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {balances.map((balance) => (
-                    <div
-                      key={balance.chainKey}
-                      className="border-l border-ink-700 pl-3"
-                    >
-                      <p className="font-mono text-xs text-paper-500">
-                        {chainLabel(balance.chainKey)}
-                      </p>
-                      <p className="mt-1 text-sm">{balance.amount} USDC</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CardBody>
-          </Card>
-
+          
           <Card>
             <CardHeader>
               <p className="text-sm font-medium">Deposit USDC into Gateway</p>
@@ -336,38 +298,7 @@ if (firstWallet) {
             </CardBody>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <p className="text-sm font-medium">Pending Gateway deposits</p>
-            </CardHeader>
-            <CardBody>
-              {pendingDeposits.length === 0 ? (
-                <p className="text-sm text-paper-500">
-                  No deposits are waiting for Gateway finality.
-                </p>
-              ) : (
-                <div className="space-y-3">
-                  {pendingDeposits.map((deposit) => (
-                    <div
-                      key={deposit.transactionHash}
-                      className="border-b border-ink-700 pb-3 last:border-0"
-                    >
-                      <p className="text-sm">
-                        {deposit.amount} USDC from{' '}
-                        {chainLabel(deposit.chainKey)}
-                      </p>
-                      <p className="mt-1 font-mono text-xs text-paper-500">
-                        {shortHash(deposit.transactionHash)}
-                      </p>
-                      <p className="mt-1 text-xs text-signal">
-                        Gateway status: {deposit.status}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CardBody>
-          </Card>
+          
         </>
       )}
     </div>
