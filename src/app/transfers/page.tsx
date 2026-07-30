@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Card, CardBody, CardHeader } from '@/components/ui/Card';
 
 const CHAINS = [
-  ['ETH_SEPOLIA', 'Ethereum Sepolia'], ['ARB_SEPOLIA', 'Arbitrum Sepolia'], ['OP_SEPOLIA', 'Optimism Sepolia'],
+  ['ARC_TESTNET', 'Arc Testnet'], ['ETH_SEPOLIA', 'Ethereum Sepolia'], ['ARB_SEPOLIA', 'Arbitrum Sepolia'], ['OP_SEPOLIA', 'Optimism Sepolia'],
   ['AVAX_FUJI', 'Avalanche Fuji'], ['BASE_SEPOLIA', 'Base Sepolia'], ['MATIC_AMOY', 'Polygon Amoy'],
 ] as const;
 
@@ -33,7 +33,7 @@ export default function TransfersPage() {
     } catch (err) { setError(err instanceof Error ? err.message : 'Payment failed.'); }
     finally { setSubmitting(false); }
   }
-  return <div className="space-y-8"><header><p className="font-mono text-xs text-signal mb-2">UNIFIED USDC PAYMENT</p><h1 className="font-display text-3xl font-semibold tracking-tight">Send USDC anywhere</h1><p className="text-paper-500 mt-2 max-w-xl">Gateway automatically draws from your finalized balances across supported chains and mints USDC on the destination chain.</p></header>
+  return <div className="space-y-8"><header><p className="font-mono text-xs text-signal mb-2">UNIFIED USDC PAYMENT</p><h1 className="font-display text-3xl font-semibold tracking-tight">Send USDC Anywhere</h1><p className="text-paper-500 mt-2 max-w-xl">Gateway automatically draws from your finalized balances across supported chains and mints USDC on the destination chain.</p></header>
     <Card><CardHeader><p className="text-sm font-medium">New payment</p></CardHeader><CardBody><form onSubmit={submit} className="space-y-4 max-w-lg">
       <label className="block"><span className="block text-xs text-paper-500 mb-1">Recipient EVM address</span><input value={recipient} onChange={(event) => setRecipient(event.target.value)} required placeholder="0x…" className="w-full rounded-sm border border-ink-600 bg-ink-800 px-3 py-2 text-sm font-mono" /></label>
       <label className="block"><span className="block text-xs text-paper-500 mb-1">Destination chain</span><select value={destinationChainKey} onChange={(event) => setDestinationChainKey(event.target.value as typeof destinationChainKey)} className="w-full rounded-sm border border-ink-600 bg-ink-800 px-3 py-2 text-sm">{CHAINS.map(([key, label]) => <option value={key} key={key}>{label}</option>)}</select></label>
