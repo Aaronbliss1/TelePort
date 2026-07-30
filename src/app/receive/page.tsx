@@ -69,16 +69,14 @@ const sortedWallets = [...wallets].sort(
   return (
     <div className="space-y-8">
       <header>
-        <p className="font-mono text-xs text-signal mb-2">RECEIVE USDC</p>
         <h1 className="font-display text-3xl font-semibold tracking-tight">
-          Receive on any supported chain
+          Receive USDC on supported chain
         </h1>
         <p className="text-paper-500 mt-2 max-w-xl">
-          Choose the chain your sender is using, then share its matching
-          address. Only send USDC on the selected testnet.
+          Choose the chain your sender is using, only send USDC on the
+          selected testnet.
         </p>
       </header>
-
       {wallet ? (
         <>
           <Card>
@@ -107,7 +105,7 @@ const sortedWallets = [...wallets].sort(
 
               <div>
                 <p className="text-xs text-paper-500 mb-1">
-                  Your USDC receiving address
+                  Your USDC Address
                 </p>
 
                 <div className="flex gap-2">
@@ -125,7 +123,7 @@ const sortedWallets = [...wallets].sort(
                 </div>
           
               </div>
-              <a href="https://faucet.circle.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-signal hover:text-signal-glow transition-colors" > <FaucetIcon /> Get testnet USDC from Circle's faucet </a>
+              <a href="https://faucet.circle.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-signal hover:text-signal-glow transition-colors" > <FaucetIcon /> Get USDC Testnet Faucet </a>
               
               <p className="rounded-sm border border-amber-500/30 bg-amber-500/5 px-3 py-2 text-xs text-paper-300">
                 Send only USDC on {labels[chainKey] ?? chainKey}. Sending
