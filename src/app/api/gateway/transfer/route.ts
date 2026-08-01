@@ -97,10 +97,10 @@ export async function POST(request: NextRequest) {
     const wallets = await getUserGatewayWalletPairs(user.id);
     const destination = wallets.find((wallet) => wallet.chainKey === parsed.data.destinationChainKey);
     if (!destination) throw new Error('Destination wallet is unavailable.');
-    const amount = parseUsdcAtomic(parsed.data.amount);
+   const amount = parseUsdcAtomic(parsed.data.amount);
     const fee = feeForUsdcAtomic(amount, feeBps());
     const total = amount + fee;
-    const sourceAmounts = allocate(wallets, await getUnifiedBalances(wallets), total);
+    const sourceAmounts = allocate([destination], await getUnifiedBalances(wallets), total);
     const primarySource = sourceAmounts[0];
     if (!primarySource) throw new Error('No finalized unified USDC is available for this payment.');
     const admin = getSupabaseServerClient();
