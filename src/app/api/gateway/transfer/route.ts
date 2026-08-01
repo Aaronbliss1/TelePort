@@ -5,7 +5,7 @@ import { requireUser, UnauthorizedError } from '@/lib/auth/require-role';
 import { isUnifiedChainKey } from '@/lib/circle/chains';
 import { executeGatewayTransfer, getUnifiedBalances, type BurnAllocation } from '@/lib/circle/gateway';
 import { getUserGatewayWalletPairs, type UserGatewayWalletPair } from '@/lib/circle/user-wallets';
-import { feeForUsdcAtomic, formatUsdcAtomic, parseUsdcAtomic } from '@/lib/money';
+import { feeForUsdcAtomic, formatUsdcAtomic, parseUsdcAtomic, parseUsdcAtomicAllowZero } from '@/lib/money';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { evmAddressSchema, usdcAmountSchema } from '@/lib/validation';
 
@@ -32,7 +32,7 @@ function allocate(wallets: UserGatewayWalletPair[], balances: { chainKey: string
   let remaining = total;
   const sourceAmounts: { source: UserGatewayWalletPair; amountAtomic: bigint }[] = [];
   for (const wallet of wallets) {
-    const available = parseUsdcAtomic(balances.find((balance) => balance.chainKey === wallet.chainKey)?.amount ?? '0');
+   const available = parseUsdcAtomicAllowZero(balances.find((balance) => balance.chainKey === wallet.chainKey)?.amount ?? '0');
     const amountAtomic = available < remaining ? available : remaining;
     if (amountAtomic > 0n) sourceAmounts.push({ source: wallet, amountAtomic });
     remaining -= amountAtomic;
@@ -120,6 +120,7 @@ export async function POST(request: NextRequest) {
     await admin.rpc('create_payment_journal', { payment_id: payment.id });
     return NextResponse.json({ payment: submitted, gatewayTransferId: transfer.gatewayTransferId, quote: { amount: formatUsdcAtomic(amount), fee: formatUsdcAtomic(fee), total: formatUsdcAtomic(total), feeBps: feeBps() } }, { status: 201 });
   } catch (error) {
+    console.error('Gateway transfer POST error:', error);
     const status = error instanceof UnauthorizedError ? error.status : 500;
     return NextResponse.json({ error: error instanceof Error ? error.message : 'Gateway payment failed.' }, { status });
   }

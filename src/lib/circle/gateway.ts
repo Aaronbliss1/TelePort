@@ -84,7 +84,6 @@ function json(value: unknown) {
     (_key, item) => (typeof item === 'bigint' ? item.toString() : item),
   );
 }
-
 async function gatewayFetch(path: string, init?: RequestInit) {
   const response = await fetch(`${GATEWAY_API_BASE_URL}${path}`, init);
   const body = (await response.json().catch(() => null)) as {
@@ -92,8 +91,16 @@ async function gatewayFetch(path: string, init?: RequestInit) {
   } | null;
 
   if (!response.ok || !body) {
+    console.error(
+      'Gateway API error',
+      path,
+      response.status,
+      JSON.stringify(body, null, 2),
+    );
     throw new Error(
-      body?.message ?? `Gateway request failed (${response.status}).`,
+      body?.message
+        ? `${body.message} — full response: ${JSON.stringify(body)}`
+        : `Gateway request failed (${response.status}).`,
     );
   }
 
