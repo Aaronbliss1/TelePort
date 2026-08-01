@@ -28,11 +28,18 @@ function platformFeeRecipient(): Address | null {
   return value as Address;
 }
 
+
+// Reserve a small buffer per chain to cover that chain's own burn-transaction
+// gas cost (e.g. Arc charges gas in USDC), so we never try to fully drain a
+// chain's exact reported balance in one allocation.
+const PER_CHAIN_GAS_BUFFER_ATOMIC = 10_000n; // 0.01 USDC
+
 function allocate(wallets: UserGatewayWalletPair[], balances: { chainKey: string; amount: string }[], total: bigint) {
   let remaining = total;
   const sourceAmounts: { source: UserGatewayWalletPair; amountAtomic: bigint }[] = [];
   for (const wallet of wallets) {
-   const available = parseUsdcAtomicAllowZero(balances.find((balance) => balance.chainKey === wallet.chainKey)?.amount ?? '0');
+    const rawAvailable = parseUsdcAtomicAllowZero(balances.find((balance) => balance.chainKey === wallet.chainKey)?.amount ?? '0');
+    const available = rawAvailable > PER_CHAIN_GAS_BUFFER_ATOMIC ? rawAvailable - PER_CHAIN_GAS_BUFFER_ATOMIC : 0n;
     const amountAtomic = available < remaining ? available : remaining;
     if (amountAtomic > 0n) sourceAmounts.push({ source: wallet, amountAtomic });
     remaining -= amountAtomic;
