@@ -6,25 +6,27 @@ const config: Config = {
     extend: {
       colors: {
         // TelePort palette — a dark ledger with a single USDC-blue accent.
+        // Values reference CSS variables (see globals.css) so the whole app
+        // flips between dark/light via a single `.light` class on <html>.
         ink: {
-          950: '#07090c',
-          900: '#0d1117',
-          800: '#151b23',
-          700: '#1e2733',
-          600: '#2a3542',
+          950: 'rgb(var(--ink-950) / <alpha-value>)',
+          900: 'rgb(var(--ink-900) / <alpha-value>)',
+          800: 'rgb(var(--ink-800) / <alpha-value>)',
+          700: 'rgb(var(--ink-700) / <alpha-value>)',
+          600: 'rgb(var(--ink-600) / <alpha-value>)',
         },
         paper: {
-          100: '#f5f7fa',
-          300: '#c7d0dc',
-          500: '#8b96a5',
+          100: 'rgb(var(--paper-100) / <alpha-value>)',
+          300: 'rgb(var(--paper-300) / <alpha-value>)',
+          500: 'rgb(var(--paper-500) / <alpha-value>)',
         },
         signal: {
-          DEFAULT: '#3d8bff', // USDC-esque blue, the one accent color
-          dim: '#2a5db3',
-          glow: '#6fa8ff',
+          DEFAULT: 'rgb(var(--signal) / <alpha-value>)',
+          dim: 'rgb(var(--signal-dim) / <alpha-value>)',
+          glow: 'rgb(var(--signal-glow) / <alpha-value>)',
         },
-        gain: '#3ecf8e',
-        loss: '#ef5350',
+        gain: 'rgb(var(--gain) / <alpha-value>)',
+        loss: 'rgb(var(--loss) / <alpha-value>)',
       },
       fontFamily: {
         display: ['var(--font-display)'],

@@ -5,6 +5,47 @@
 @tailwind utilities;
 
 :root {
+  --ink-950: 7 9 12;
+  --ink-900: 13 17 23;
+  --ink-800: 21 27 35;
+  --ink-700: 30 39 51;
+  --ink-600: 42 53 66;
+
+  --paper-100: 245 247 250;
+  --paper-300: 199 208 220;
+  --paper-500: 139 150 165;
+
+  --signal: 61 139 255;
+  --signal-dim: 42 93 179;
+  --signal-glow: 111 168 255;
+
+  --gain: 62 207 142;
+  --loss: 239 83 80;
+}
+
+.light {
+  --ink-950: 250 251 252;
+  --ink-900: 255 255 255;
+  --ink-800: 241 243 246;
+  --ink-700: 223 227 232;
+  --ink-600: 203 209 217;
+
+  --paper-100: 15 18 23;
+  --paper-300: 51 61 74;
+  --paper-500: 100 110 122;
+
+  --signal: 43 118 224;
+  --signal-dim: 30 82 158;
+  --signal-glow: 90 148 235;
+
+  --gain: 21 150 105;
+  --loss: 214 48 48;
+}
+
+html {
+  transition: background-color 0.15s ease;
+}
+:root {
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
