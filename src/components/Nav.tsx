@@ -5,9 +5,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getSupabaseBrowserClient } from '@/lib/supabase/client';
 import ThemeToggle from '@/components/ThemeToggle';
-
 const LINKS = [
-  { href: '/', label: 'Overview' },
+  { href: '/app', label: 'Overview' },
   { href: '/receive', label: 'Receive' },
   { href: '/transfers', label: 'Send' },
   { href: '/wallets', label: 'Wallets' },
