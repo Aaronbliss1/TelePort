@@ -94,7 +94,7 @@ export default function Nav() {
       </aside>
 
       {/* Mobile top bar */}
-      <div className="md:hidden sticky top-0 z-40 border-b border-ink-700 bg-ink-950">
+      <div className="md:hidden sticky top-0 z-40 border-b border-ink-700 bg-ink-950 relative">
         <div className="flex items-center justify-between px-4 py-4">
           <Link href="/app" className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-signal shadow-[0_0_8px_theme(colors.signal.DEFAULT)]" />
@@ -124,7 +124,7 @@ export default function Nav() {
         </div>
 
         {mobileOpen && (
-          <div className="border-t border-ink-700 px-4 py-4 space-y-4">
+     <div className="absolute top-full left-0 right-0 border-t border-ink-700 bg-ink-950 px-4 py-4 space-y-4 shadow-lg">
             <nav className="space-y-1">
               {LINKS.map((link) => {
                 const active = pathname === link.href;
