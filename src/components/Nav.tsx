@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getSupabaseBrowserClient } from '@/lib/supabase/client';
-
-const LINKS = [
+import ThemeToggle from '@/components/ThemeToggle';
   { href: '/', label: 'Overview' },
   { href: '/receive', label: 'Receive' },
   { href: '/transfers', label: 'Send' },
@@ -97,15 +96,17 @@ export default function Nav() {
       {/* Mobile top bar */}
       <div className="md:hidden sticky top-0 z-40 border-b border-ink-700 bg-ink-950">
         <div className="flex items-center justify-between px-4 py-4">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/app" className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-signal shadow-[0_0_8px_theme(colors.signal.DEFAULT)]" />
             <span className="font-display font-semibold tracking-tight text-lg">TelePort</span>
           </Link>
-          <button
-            onClick={() => setMobileOpen((open) => !open)}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            className="flex h-9 w-9 items-center justify-center rounded-sm border border-ink-600 text-paper-300"
-          >
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileOpen((open) => !open)}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              className="flex h-9 w-9 items-center justify-center rounded-sm border border-ink-600 text-paper-300"
+            >
             {mobileOpen ? (
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -117,8 +118,9 @@ export default function Nav() {
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
-            )}
-          </button>
+           )}
+            </button>
+          </div>
         </div>
 
         {mobileOpen && (
