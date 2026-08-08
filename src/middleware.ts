@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-const PUBLIC_PATHS = ['/login', '/auth/callback'];
+const PUBLIC_PATHS = ['/login', '/auth/callback', '/'];
 const PUBLIC_API_PATHS = ['/api/auth', '/api/webhooks/circle'];
 
 export async function middleware(request: NextRequest) {
@@ -32,7 +32,9 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isPublicPath = PUBLIC_PATHS.some((path) => request.nextUrl.pathname.startsWith(path));
+  const isPublicPath = PUBLIC_PATHS.some((path) =>
+    path === '/' ? request.nextUrl.pathname === '/' : request.nextUrl.pathname.startsWith(path),
+  );
   const isApiRoute = request.nextUrl.pathname.startsWith('/api');
   const isPublicApiRoute = PUBLIC_API_PATHS.some((path) => request.nextUrl.pathname.startsWith(path));
 
