@@ -11,7 +11,10 @@ export async function GET() {
 
     const wallets = await Promise.all(
       pairs.map(async (pair) => {
-        const balances = await getWalletBalance(pair.paymentWalletId).catch(() => []);
+        const balances = await getWalletBalance(pair.paymentWalletId).catch((err) => {
+          console.error(`getWalletBalance failed for ${pair.chainKey} (${pair.paymentWalletId}):`, err);
+          return [];
+        });
         const usdc = (balances ?? []).find(
           (b: { token?: { symbol?: string } }) => b.token?.symbol === 'USDC',
         );
