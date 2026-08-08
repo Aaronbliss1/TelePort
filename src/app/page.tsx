@@ -71,12 +71,6 @@ export default function LandingPage() {
             >
               Launch app
             </Link>
-            <Link
-              href="/login"
-              className="text-sm text-paper-500 hover:text-paper-100 transition-colors"
-            >
-              Sign in
-            </Link>
           </div>
 
           <div className="mt-14 rounded-sm border border-ink-700 bg-ink-900 p-6 md:p-8">
