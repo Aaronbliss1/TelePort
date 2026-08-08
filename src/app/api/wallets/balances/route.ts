@@ -15,6 +15,7 @@ export async function GET() {
           console.error(`getWalletBalance failed for ${pair.chainKey} (${pair.paymentWalletId}):`, err);
           return [];
         });
+        console.log(`${pair.chainKey} raw balances response:`, JSON.stringify(balances, null, 2));
         const usdc = (balances ?? []).find(
           (b: { token?: { symbol?: string } }) => b.token?.symbol === 'USDC',
         );
