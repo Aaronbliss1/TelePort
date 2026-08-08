@@ -35,7 +35,7 @@ export default function Nav() {
     router.refresh();
   }
 
-  if (pathname === '/login') return null;
+  if (pathname === '/login' || pathname === '/') return null;
 
   const settingsBlock = (
     <div className="text-xs text-paper-500 font-mono leading-relaxed space-y-3">
