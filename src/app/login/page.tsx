@@ -46,7 +46,7 @@ function LoginForm() {
 
     setLoading(true);
 
-    const { error } =
+    const { data, error } =
       action === 'sign-in'
         ? await supabase.auth.signInWithPassword({ email, password })
         : await supabase.auth.signUp({
@@ -61,7 +61,8 @@ function LoginForm() {
       return;
     }
 
-    if (action === 'sign-up') {
+    if (action === 'sign-up' && !data.session) {
+      // Email confirmation is required and no session was created yet.
       setLoading(false);
       setMessage({
         text: 'Check your email to confirm your account, then sign in.',
