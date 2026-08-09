@@ -4,7 +4,7 @@ import { getSupabaseRouteClient } from '@/lib/supabase/route-client';
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
-  const redirectTo = searchParams.get('redirectTo') ?? '/';
+  const redirectTo = searchParams.get('redirectTo') ?? '/auth/finishing';
 
   if (code) {
     const supabase = await getSupabaseRouteClient();
