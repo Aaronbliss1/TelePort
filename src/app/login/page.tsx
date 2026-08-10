@@ -6,6 +6,13 @@ import { getSupabaseBrowserClient } from '@/lib/supabase/client';
 
 type PasswordAction = 'sign-in' | 'sign-up';
 
+function isPasswordStrong(password: string): boolean {
+  const hasLetter = /[a-zA-Z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSymbol = /[^a-zA-Z0-9]/.test(password);
+  return password.length >= 8 && hasLetter && hasNumber && hasSymbol;
+}
+
 export default function LoginPage() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-ink-950" />}>
@@ -41,6 +48,14 @@ function LoginForm() {
 
     if (action === 'sign-up' && password !== confirmPassword) {
       setMessage({ text: 'Passwords do not match.', kind: 'error' });
+      return;
+    }
+
+    if (action === 'sign-up' && !isPasswordStrong(password)) {
+      setMessage({
+        text: 'Password must be at least 8 characters and include a letter, a number, and a symbol.',
+        kind: 'error',
+      });
       return;
     }
 
